@@ -1,4 +1,4 @@
-﻿# DjangoProject
+﻿# DjangoPro
 
 Djangoで作成した投稿サイトです。
 共同開発では、この `djangosnippets` ディレクトリをリポジトリのルートとして扱います。
