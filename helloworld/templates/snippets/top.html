@@ -2,7 +2,7 @@
 {% block main %}
 <div class="welcome" xmlns="http://www.w3.org/1999/html">
     <form method = "get" action="/" class="search" id="search">
-        <input type="text" placeholder="検索",name = q , value = "{{ query }}">
+        <input type="text" placeholder="検索" name = "q" value = "{{ query }}">
     </form>
 </div>
 
@@ -12,12 +12,9 @@
         {% if snippets %}
         <div class="scroll-box">
         {% for snippet in snippets %}
-            <div class="wordlist">
-                <a href="{% url 'snippet_detail' snippet.id %}" class="word">{{ snippet.code }} -【{{ snippet.title }}】</a>
-                {% if user.is_authenticated and snippet.created_by_id == user.id %}
-                <label><- </label>
-                {% endif %}
-            </div>
+            <a href="{% url 'snippet_detail' snippet.id %}" class="word"><div class="wordlist">
+                {{ snippet.code }} -【{{ snippet.title }}】
+            </div></a>
         {% endfor %}
         </div>
         {% endif %}
