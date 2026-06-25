@@ -101,8 +101,23 @@ main {
     border-radius: 14px;
     box-shadow: 5px 5px 0 #e5e7eb;
     transition: transform 0.12s ease, box-shadow 0.12s ease;
+    position: relative;
+    padding-right: 7rem;
 }
-
+.creator {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: #111111;
+    background-color: #b6ff3b;
+    border: 2px solid #111111;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    white-space: nowrap;
+}
 .wordlist:hover {
     transform: translate(-2px, -2px);
     box-shadow: 8px 8px 0 #b6ff3b;

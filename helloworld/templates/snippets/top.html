@@ -14,7 +14,10 @@
         {% for snippet in snippets %}
             <a href="{% url 'snippet_detail' snippet.id %}" class="word"><div class="wordlist">
                 {{ snippet.code }} -【{{ snippet.title }}】
-            </div></a>
+                <div class = "creator">by {{snippet.created_by}}</div>
+            </div>
+            </a>
+
         {% endfor %}
         </div>
         {% endif %}
