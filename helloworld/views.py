@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -7,7 +8,11 @@ from helloworld.forms import SnippetForm
 
 def top(request):
     snippets = Helloworld.objects.order_by('code')
-    context = {'snippets': snippets}
+    trend_snippets = Helloworld.objects.order_by('-click_count',"code")[:10]
+    context = {
+        'snippets': snippets,
+        "trend_snippets":trend_snippets,
+    }
     return render(request, 'snippets/top.html', context)
 
 
@@ -41,5 +46,9 @@ def snippet_edit(request, snippet_id):
 
 
 def snippet_detail(request, snippet_id):
+    ##指定されたIDの単語探して
+    Helloworld.objects.filter(pk=snippet_id).update(
+        click_count = F('click_count') + 1,
+    )
     snippet = get_object_or_404(Helloworld, pk=snippet_id)
     return render(request, 'snippets/snippet_detail.html', {'snippet': snippet})

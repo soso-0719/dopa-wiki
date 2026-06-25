@@ -11,6 +11,6 @@ class Helloworld(models.Model):
                                    on_delete=models.CASCADE)
     created_at = models.DateTimeField('投稿日', auto_now_add=True)
     updated_at = models.DateTimeField('更新日', auto_now=True)
-
+    click_count = models.PositiveIntegerField("クリック数",default=0)
     def __str__(self):
         return self.title
