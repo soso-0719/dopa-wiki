@@ -14,4 +14,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', CreateView.as_view(template_name='snippets/signup.html',
                                        form_class=UserCreationForm, success_url='/'), name='signup'),
+    path('search_suggest/', views.search_suggest, name='search_suggest'),
 ]

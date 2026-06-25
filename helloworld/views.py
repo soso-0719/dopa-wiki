@@ -1,7 +1,8 @@
-from django.db.models import F
-from django.http import HttpResponseForbidden
+from django.db.models import F,Q
+from django.http import HttpResponseForbidden,JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from helloworld.models import Helloworld
 from helloworld.forms import SnippetForm
 
@@ -52,3 +53,26 @@ def snippet_detail(request, snippet_id):
     )
     snippet = get_object_or_404(Helloworld, pk=snippet_id)
     return render(request, 'snippets/snippet_detail.html', {'snippet': snippet})
+
+def search_suggest(request):
+   query = request.GET.get('q',"").strip()
+
+   if not query :
+       return JsonResponse({"results:[]"})
+
+   snippets = Helloworld.objects.filter(
+       Q(title__icontains=query) |
+       Q(code__icontains=query) |
+       Q(description__icontains=query)
+   ).order_by("code")
+
+
+   result = [
+       {
+           "title": snippet.title,
+           "code": snippet.code,
+           "url":reverse("snippet_detail",args = [snippet.id])
+       }
+       for snippet in snippets
+   ]
+   return JsonResponse({"results":result})

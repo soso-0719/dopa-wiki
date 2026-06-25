@@ -23,6 +23,7 @@ main {
 }
 
 .welcome {
+    position: relative;
     margin-bottom: 2rem;
     align-items: center;
     display: flex;
@@ -197,7 +198,10 @@ main {
 .submitbtn .btn:hover {
     transform: translate(-2px, -2px);
     box-shadow: 9px 9px 0 #111111;
-}.search-suggestions {
+}
+
+.search-suggestions {
+    display: none;
     width: 30rem;
     max-width: calc(100vw - 2rem);
     margin-top: 0.8rem;
@@ -207,6 +211,10 @@ main {
     box-shadow: 6px 6px 0 #b6ff3b;
     overflow: hidden;
     z-index: 25;
+}
+
+.search-suggestions.is-open {
+    display: block;
 }
 
 .suggestion-item,

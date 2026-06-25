@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block main %}
 <div class="welcome" xmlns="http://www.w3.org/1999/html">
-    <form method = "get" action="/" class="search" id="search">
-        <input type="text" placeholder="検索" name = "q" value = "{{ query }}">
+     <form action="#" class="search" id="search">
+        <input type="text" id="search-input" placeholder="検索" autocomplete="off">
     </form>
+<div id="search-suggestions" class="search-suggestions"></div>
 </div>
 
 <div class="twocolumn">
@@ -50,4 +51,48 @@
 <div class="submitbtn">
 <a class="btn btn-primary" href="{% url 'snippet_new' %}">＋</a>
 </div>
+
+<script>
+const serchInput = document.getElementById('search-input');
+const suggestBox = document.getElementById('search-suggestions');
+
+serchInput.addEventListener('input', async function () {
+    const query = serchInput.value.trim();
+
+    if (!query) {
+        suggestBox.innerHTML = '';
+        suggestBox.classList.remove('is-open');
+        return;
+    }
+
+    const response = await fetch(`/helloworld/search_suggest/?q=${encodeURIComponent(query)}`);
+    const data = await response.json();
+
+    if (data.results.length === 0) {
+        suggestBox.innerHTML = '<div class="suggestion-empty">候補がありません</div>';
+        suggestBox.classList.add('is-open');
+        return;
+    }
+
+    suggestBox.innerHTML = data.results.map(function (item) {
+        return `
+            <a href="${item.url}" class="suggestion-item">
+                ${item.title}（${item.code}）
+            </a>
+        `;
+    }).join('');
+
+    suggestBox.classList.add('is-open');
+});
+
+document.getElementById('search').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const firstSuggestion = suggestBox.querySelector('.suggestion-item');
+    if (firstSuggestion) {
+        window.location.href = firstSuggestion.href;
+    }
+});
+</script>
+
 {% endblock %}
