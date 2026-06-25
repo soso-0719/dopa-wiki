@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block main %}
-<h2>エラー解決メモの投稿</h2>
+<h2>単語登録</h2>
 <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
-    {% bootstrap_button button_type='submit' content='投稿' %}
+    {% bootstrap_button button_type='submit' content='登録' %}
 </form>
 {% endblock %}

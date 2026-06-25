@@ -6,7 +6,7 @@ from helloworld.forms import SnippetForm
 
 
 def top(request):
-    snippets = Helloworld.objects.all()
+    snippets = Helloworld.objects.order_by('code')
     context = {'snippets': snippets}
     return render(request, 'snippets/top.html', context)
 

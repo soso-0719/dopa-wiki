@@ -3,9 +3,9 @@ from django.db import models
 
 # Create your models here.
 class Helloworld(models.Model):
-    title = models.CharField('タイトル', max_length=128)
-    code = models.TextField('コード', blank=True)
-    description = models.TextField('説明', blank=True)
+    title = models.CharField('単語', max_length=128)
+    code = models.CharField('読み仮名', blank=False)
+    description = models.TextField('語釈', blank=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    verbose_name='投稿者',
                                    on_delete=models.CASCADE)

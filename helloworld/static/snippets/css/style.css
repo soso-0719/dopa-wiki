@@ -3,43 +3,81 @@ main {
 }
 
 .welcome {
-    padding: 3rem 0;
     margin-bottom: 2rem;
-    background-color: #eee;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-.use-way {
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    background-color: #f8f9fa;
-    border-left: 4px solid #0d6efd;
+
+.word{
+    color: black;
 }
 
-.use-way h2 {
-    margin-bottom: 1rem;
+.search {
+    display: flex;
+    width: 20rem;
+    margin-top: 1rem;
+    align-items: center;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 24px;
+    border: 2px solid black;
 }
 
-.use-way ol {
-    margin-bottom: 0;
+.search::before {
+    width: 3rem;
+    height: 1rem;
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%20%3Cpath%20d%3D%22M23.7%2020.8%2019%2016.1c-.2-.2-.5-.3-.8-.3h-.8c1.3-1.7%202-3.7%202-6C19.5%204.4%2015.1%200%209.7%200S0%204.4%200%209.7s4.4%209.7%209.7%209.7c2.3%200%204.3-.8%206-2v.8c0%20.3.1.6.3.8l4.7%204.7c.4.4%201.2.4%201.6%200l1.3-1.3c.5-.5.5-1.2.1-1.6zm-14-5.1c-3.3%200-6-2.7-6-6s2.7-6%206-6%206%202.7%206%206-2.6%206-6%206z%22%20fill%3D%22%239aa0a6%22%3E%3C%2Fpath%3E%20%3C%2Fsvg%3E');
+    background-position: center;
+    background-repeat: no-repeat;
+    content: '';
 }
 
-.snippet-date {
-    margin-bottom: 1.5rem;
-    color: #6c757d;
+.search input {
+    width: 16rem;
+    height: 2.5rem;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    background-color: transparent;
 }
 
-.source-code {
-    padding: 1rem;
-    margin: 1rem 0 1.5rem;
-    background-color: #f8f9fa;
-    border-left: 4px solid #0d6efd;
-    white-space: pre-wrap;
+.submitbtn{
+    margin-top: 1%;
+    text-align: center;
 }
 
-.source-code span {
-    background-color: transparent !important;
-    font-family: Consolas, Monaco, monospace;
+.twocolumn{
+    display: flex;
+    height: 62%;
+}
+
+.twocolumn h2{
+    text-align: center;
+}
+
+.index, .trend{
+    width: 47%;
+    margin-left: 2%;
+}
+
+.scroll-box {
+    height: 90%;
+    border: 1px solid black;
+    background-color: white;
+    overflow-y: scroll;
+    font-size: 1.3rem;
+}
+
+.scroll-box::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+  display:none;
+}
+
+.wordlist{
+    padding: 0.3rem;
+}
+
+.wordlist label{
+    color: cornflowerblue;
 }

@@ -1,40 +1,53 @@
 {% extends 'base.html' %}
 {% block main %}
-<div class="welcome">
-    <h1 class="title">エラーメモを共有</h1>
-    <p class="subtitle">プログラミング中に出たエラーと解決方法を記録できます。</p>
-    <a class="btn btn-primary" href="{% url 'snippet_new' %}">メモを投稿</a>
+<div class="welcome" xmlns="http://www.w3.org/1999/html">
+    <form action="#" class="search" id="search">
+        <input type="text" placeholder="検索">
+    </form>
 </div>
 
-<div class="use-way">
-    <h2>使い方</h2>
-    <ol>
-        <li>タイトルにはエラー名や困った内容を入力してください。</li>
-        <li>コードにはエラーが出たコードや修正後のコードを入力してください。</li>
-        <li>説明には原因や解決方法、参考にした内容を記録してください。</li>
-    </ol>
+<div class="twocolumn">
+    <div class="index">
+        <h2>登録単語</h2>
+        {% if snippets %}
+        <div class="scroll-box">
+        {% for snippet in snippets %}
+            <div class="wordlist">
+                <a href="{% url 'snippet_detail' snippet.id %}" class="word">{{ snippet.code }} -【{{ snippet.title }}】</a>
+                {% if user.is_authenticated and snippet.created_by_id == user.id %}
+                <label><- </label>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="trend">
+        <h2>トレンド</h2>
+        {% if snippets %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>順位</th>
+                <th>見出し語</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for snippet in snippets %}
+            <tr>
+                {% if forloop.counter <= 10 %}
+                <th>{{ forloop.counter }}</th>
+                <th><a href="{% url 'snippet_detail' snippet.id %}" class="word">{{ snippet.title }}（{{ snippet.code }}）</a></th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
 </div>
 
-{% if snippets %}
-<table class="table">
-    <thead>
-    <tr>
-        <th>投稿者</th>
-        <th>投稿日</th>
-        <th>エラータイトル</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for snippet in snippets %}
-    <tr>
-        <th>{{ snippet.created_by.username }}</th>
-        <th>{{ snippet.created_at }}</th>
-        <th><a href="{% url 'snippet_detail' snippet.id %}">{{ snippet.title }}</a></th>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>スニッペとはまだ投稿されていません．</p>
-{% endif %}
+<div class="submitbtn">
+<a class="btn btn-primary" href="{% url 'snippet_new' %}">＋</a>
+</div>
 {% endblock %}

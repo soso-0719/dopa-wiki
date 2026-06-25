@@ -1,18 +1,13 @@
 {% extends 'base.html' %}
 {% block main %}
-<h2>{{ snippet.title }} by {{ snippet.created_by.username }}</h2>
+<h2>{{ snippet.title }}（{{ snippet.code }}）</h2>
+<p>{{ snippet.description }}</p>
 <div class="snippet-date">
-    投稿日： {{ snippet.created_at|date:'DATETIME_FORMAT' }}
     {% if user.is_authenticated and snippet.created_by_id == user.id %}
     <a href="{% url 'snippet_edit' snippet.id %}">編集</a>
     {% endif %}
 </div>
-<h3>コード</h3>
-<div class="source-code">
-    <span style="background-color:orange">{{ snippet.code }}</span>
-</div>
-<h3>原因・解決メモ</h3>
-<p>{{ snippet.description }}</p>
+<p></p>
 <a class="btn btn-secondary" href="/">一覧へ戻る</a>
 {% endblock %}
 
