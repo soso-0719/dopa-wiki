@@ -240,3 +240,12 @@ main {
 .suggestion-empty {
     color: #555555;
 }
+
+.description label{
+    color: #111111;
+    background-color: #b6ff3b;
+    border: 2px solid #111111;
+    border-radius: 999px;
+    padding: 0.15rem 0.55rem;
+    white-space: nowrap;
+}

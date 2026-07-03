@@ -47,12 +47,19 @@ def snippet_edit(request, snippet_id):
 
 
 def snippet_detail(request, snippet_id):
+    snippets = Helloworld.objects.all()
+    snippet = get_object_or_404(Helloworld, pk=snippet_id)
+
     ##指定されたIDの単語探して
     Helloworld.objects.filter(pk=snippet_id).update(
         click_count = F('click_count') + 1,
     )
-    snippet = get_object_or_404(Helloworld, pk=snippet_id)
-    return render(request, 'snippets/snippet_detail.html', {'snippet': snippet})
+
+    context = {
+        'snippets': snippets,
+        'snippet': snippet
+    }
+    return render(request, 'snippets/snippet_detail.html', context)
 
 def search_suggest(request):
    query = request.GET.get('q',"").strip()

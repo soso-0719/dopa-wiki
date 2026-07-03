@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% block main %}
 <h2>{{ snippet.title }}（{{ snippet.code }}）</h2>
-<p>{{ snippet.description }}</p>
+{% for snip in snippets %}
+{% if snip.title == snippet.title and snip.code == snippet.code %}
+<div class="description">{{ snip.description }} <label>by {{snip.created_by}}</label>
+</div>
 <div class="snippet-date">
-    {% if user.is_authenticated and snippet.created_by_id == user.id %}
-    <a href="{% url 'snippet_edit' snippet.id %}">編集</a>
+    {% if user.is_authenticated and snip.created_by_id == user.id %}
+    <a href="{% url 'snippet_edit' snip.id %}">編集</a>
     {% endif %}
 </div>
+{% endif %}
+{% endfor %}
 <p></p>
 <a class="btn btn-secondary" href="/">一覧へ戻る</a>
 {% endblock %}
