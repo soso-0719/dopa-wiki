@@ -8,7 +8,7 @@ from helloworld.forms import SnippetForm
 
 
 def top(request):
-    snippets = Helloworld.objects.order_by('code')
+    snippets = Helloworld.objects.order_by('code', 'title')
     trend_snippets = Helloworld.objects.order_by('-click_count',"code")[:10]
     context = {
         'snippets': snippets,

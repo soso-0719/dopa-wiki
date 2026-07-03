@@ -13,10 +13,13 @@
         {% if snippets %}
         <div class="scroll-box">
         {% for snippet in snippets %}
-            <a href="{% url 'snippet_detail' snippet.id %}" class="word"><div class="wordlist">
+            <a href="{% url 'snippet_detail' snippet.id %}" class="word">
+            {% ifchanged %}
+                <div class="wordlist">
                 {{ snippet.code }} -【{{ snippet.title }}】
                 <div class = "creator">by {{snippet.created_by}}</div>
             </div>
+            {% endifchanged %}
             </a>
         {% endfor %}
         </div>
