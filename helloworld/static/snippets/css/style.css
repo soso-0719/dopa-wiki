@@ -242,6 +242,7 @@ main {
 }
 
 .description label{
+    font-size: 0.8rem;
     color: #111111;
     background-color: #b6ff3b;
     border: 2px solid #111111;
