@@ -17,7 +17,13 @@
             {% ifchanged snippet.code snippet.title %}
                 <div class="wordlist">
                 {{ snippet.code }} -【{{ snippet.title }}】
-                <div class = "creator">by {{snippet.created_by}}</div>
+                <div class = "creator">by {{snippet.created_by}}
+                    {% for snip in snippets %}
+                        {% if snip.code == snippet.code and snip.title == snippet.title and snip.created_by != snippet.created_by %}
+                                , {{snip.created_by}}
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             {% endifchanged %}
             </a>
